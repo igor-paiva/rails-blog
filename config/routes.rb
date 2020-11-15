@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     get '/followers', to: 'posts#followers_posts', on: :collection
   end
 
-  resources :comments, only: %i(create update destroy)
+  resources :comments, only: %i(create update destroy) do
+    get '/:post_id', to: 'comments#post_comments', on: :collection
+  end
 end

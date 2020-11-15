@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: %i(post_comments)
   before_action :set_comment, only: %i(update destroy)
+
+  def post_comments
+    @comments = @post.comments
+  end
 
   def create
     @comment = Comment.create!(comment_params)
@@ -28,6 +33,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+    def set_post
+      @post = Post.find(params[:post_id])
+    end
 
     def set_comment
       @comment = Comment.find(params[:id])
