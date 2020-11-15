@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :posts, except: %i(index) do
     get '/followers', to: 'posts#followers_posts', on: :collection
   end
+
+  resources :comments, only: %i(create update destroy)
 end
