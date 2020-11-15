@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, except: %i(create)
+  before_action :set_follower_relation, only: %i(unfollow)
   skip_before_action :authenticate_user, only: %i(create)
 
   def show; end
@@ -30,7 +31,39 @@ class UsersController < ApplicationController
     head :ok
   end
 
+  def followers
+    @followers = @user.followers
+  end
+
+  def followeds
+    @followeds = @user.followeds
+  end
+
+  def follow
+    Follower.create!(follower_id: @user.id, followed_id: params[:user_id])
+    
+    head :ok
+
+  rescue
+    head :unprocessable_entity
+  end
+
+  def unfollow
+    head :not_found unless @follower_relation
+
+    @follower_relation.destroy!
+
+    head :ok
+  end
+
   private
+
+    def set_follower_relation
+      @follower_relation = Follower.find_by(
+        follower_id: @user.id,
+        followed_id: params[:user_id]
+      )
+    end
 
     def set_user
       @user = current_user
