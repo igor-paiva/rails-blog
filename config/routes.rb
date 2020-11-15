@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     get '/followeds', to: 'users#followeds', on: :collection
   end
 
-  resources :posts, except: %i(index)
+  resources :posts, except: %i(index) do
+    get '/followers', to: 'posts#followers_posts', on: :collection
+  end
 end

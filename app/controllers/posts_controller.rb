@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
-  before_action :set_post, except: %i(create)
+  before_action :set_post, except: %i(create followers_posts)
 
   def show; end
+
+  def followers_posts
+    @posts = Post.user_followers_posts(current_user.id)
+  end
 
   def create
     @post = Post.create!(post_params)
