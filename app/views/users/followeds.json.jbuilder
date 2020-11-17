@@ -1,3 +1,3 @@
 json.array! @followeds do |followed|
-  json.extract! followed, 'user_id', 'name', 'email'
+  json.extract! followed, 'id', 'name', 'email'
 end

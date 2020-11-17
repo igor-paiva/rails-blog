@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   def followers
     ActiveRecord::Base.connection.execute <<-SQL
-      SELECT u2.id AS user_id, u2.name, u2.email FROM users u1 
+      SELECT u2.id, u2.name, u2.email FROM users u1 
       INNER JOIN followers ON u1.id = followers.followed_id
       INNER JOIN users u2 ON followers.follower_id = u2.id
       WHERE followers.followed_id = #{id}
@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   def followeds
     ActiveRecord::Base.connection.execute <<-SQL
-      SELECT u2.id AS user_id, u2.name, u2.email FROM users u1 
+      SELECT u2.id, u2.name, u2.email FROM users u1 
       INNER JOIN followers ON u1.id = followers.follower_id
       INNER JOIN users u2 ON followers.followed_id = u2.id
       WHERE followers.follower_id = #{id}
