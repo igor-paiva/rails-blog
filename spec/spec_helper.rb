@@ -10,6 +10,10 @@ RSpec.configure do |config|
     end
   end
 
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
