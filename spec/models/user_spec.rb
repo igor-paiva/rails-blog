@@ -57,4 +57,54 @@ RSpec.describe User, :type => :model do
       end
     end
   end
+
+  describe '#followed_users' do
+    let(:some_user) { create(:user) }
+    let(:some_user_follower) { create(:user) }
+
+    before do
+      Follower.create(follower_id: some_user.id, followed_id: some_user_follower.id)
+    end
+
+    subject { user.followed_users }
+
+    context 'when user do not follow anyone' do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
+
+      it 'return an empty list' do
+        is_expected.to be_empty
+      end
+    end
+
+    context 'when user follows only one user' do
+      let(:user) { create(:user) }
+      let(:other_user) { create(:user) }
+
+      # using this because I can't create it using the factory
+      before do
+        Follower.create(follower_id: user.id, followed_id: other_user.id)
+      end
+
+      it 'return a list containing the followed user' do
+        is_expected.to match_array(([other_user]))
+      end
+    end
+
+    context 'when user follows more than one users' do
+      let(:user) { create(:user) }
+      let(:followeds) { create_list(:user, 3) }
+
+      # using this because I can't create it using the factory
+      before do
+        Follower.create(follower_id: user.id, followed_id: followeds.first.id)
+        Follower.create(follower_id: user.id, followed_id: followeds.second.id)
+        Follower.create(follower_id: user.id, followed_id: followeds.third.id)
+      end
+
+      it 'return a list containing all followed users' do
+        is_expected.to match_array(followeds)
+      end
+    end
+  end
 end
