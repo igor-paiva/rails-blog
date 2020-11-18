@@ -1,4 +1,7 @@
 class Follower < ApplicationRecord
+  belongs_to :follower, class_name: 'User', foreign_key: :follower_id
+  belongs_to :followed, class_name: 'User', foreign_key: :followed_id
+
   validate :valid_users?, on: :create
 
   def self.follower_of?(follower_id, followed_id)
