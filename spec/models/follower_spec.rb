@@ -27,8 +27,8 @@ RSpec.describe Follower, :type => :model do
   end
 
   describe '.follower_of?' do
-    let(:user) { create(:user) }
-    let(:other_user) { create(:user) }
+    let(:user) { create(:follower_user) }
+    let(:other_user) { create(:followed_user) }
     
     subject { described_class.follower_of?(user.id, other_user.id) }
 

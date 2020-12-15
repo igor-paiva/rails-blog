@@ -57,7 +57,7 @@ RSpec.describe User, :type => :model do
 
   describe '#follower_users' do
     let(:some_user) { create(:user) }
-    let(:some_user_follower) { create(:user) }
+    let(:some_user_follower) { create(:follower_user) }
 
     before do
       Follower.create(follower_id: some_user_follower.id, followed_id: some_user.id)
@@ -76,7 +76,7 @@ RSpec.describe User, :type => :model do
 
     context 'when user is followed by only one user' do
       let(:user) { create(:user) }
-      let(:other_user) { create(:user) }
+      let(:other_user) { create(:follower_user) }
 
       before do
         Follower.create(follower_id: other_user.id, followed_id: user.id)
@@ -89,7 +89,7 @@ RSpec.describe User, :type => :model do
 
     context 'when user is followed by more than one users' do
       let(:user) { create(:user) }
-      let(:followers) { create_list(:user, 3) }
+      let(:followers) { create_list(:follower_user, 3) }
 
       before do
         Follower.create(follower_id: followers.first.id, followed_id: user.id)
@@ -107,10 +107,10 @@ RSpec.describe User, :type => :model do
 
   describe '#followed_users' do
     let(:some_user) { create(:user) }
-    let(:some_user_follower) { create(:user) }
+    let(:some_user_followed) { create(:followed_user) }
 
     before do
-      Follower.create(follower_id: some_user.id, followed_id: some_user_follower.id)
+      Follower.create(follower_id: some_user.id, followed_id: some_user_followed.id)
     end
 
     subject { user.followed_users }
@@ -126,7 +126,7 @@ RSpec.describe User, :type => :model do
 
     context 'when user follows only one user' do
       let(:user) { create(:user) }
-      let(:other_user) { create(:user) }
+      let(:other_user) { create(:followed_user) }
 
       before do
         Follower.create(follower_id: user.id, followed_id: other_user.id)
@@ -139,7 +139,7 @@ RSpec.describe User, :type => :model do
 
     context 'when user follows more than one users' do
       let(:user) { create(:user) }
-      let(:followeds) { create_list(:user, 3) }
+      let(:followeds) { create_list(:followed_user, 3) }
 
       before do
         Follower.create(follower_id: user.id, followed_id: followeds.first.id)

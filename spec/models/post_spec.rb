@@ -9,13 +9,13 @@ RSpec.describe Post, :type => :model do
     let(:other_user) { create(:user) }
 
     let(:some_user) { create(:user) }
-    let(:some_user_follower) { create(:user) }
+    let(:some_user_followed) { create(:followed_user) }
     let(:some_user_post) { create(:post) }
 
     before do
-      Follower.create(follower_id: some_user.id, followed_id: some_user_follower.id)
+      Follower.create(follower_id: some_user.id, followed_id: some_user_followed.id)
 
-      create_list(:post, 3, user: some_user_follower)
+      create_list(:post, 3, user: some_user_followed)
     end
 
     subject { described_class.user_followers_posts(user.id) }
@@ -55,7 +55,7 @@ RSpec.describe Post, :type => :model do
     end
 
     context 'when user follows more than one user' do
-      let(:another_user) { create(:user) }
+      let(:another_user) { create(:followed_user) }
 
       before do
         Follower.create(follower_id: user.id, followed_id: other_user.id)
