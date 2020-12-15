@@ -25,4 +25,27 @@ RSpec.describe Follower, :type => :model do
       end
     end
   end
+
+  describe '.follower_of?' do
+    let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
+    
+    subject { described_class.follower_of?(user.id, other_user.id) }
+
+    context 'when the user does not follow the other' do
+      it 'return false' do
+        is_expected.to eq(false)
+      end
+    end
+
+    context 'when the user follows the other' do
+      before do
+        Follower.create(follower_id: user.id, followed_id: other_user.id)
+      end
+
+      it 'return true' do
+        is_expected.to eq(true)
+      end
+    end
+  end
 end
