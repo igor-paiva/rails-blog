@@ -1,6 +1,53 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/igor/rails-api/app/models/comment.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          2,
+          null,
+          2,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/home/igor/rails-api/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/igor/rails-api/app/models/follower.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          34,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
       "/home/igor/rails-api/app/models/post.rb": {
         "lines": [
           1,
@@ -18,13 +65,6 @@
           null,
           null,
           null,
-          null
-        ]
-      },
-      "/home/igor/rails-api/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
           null
         ]
       },
@@ -50,28 +90,6 @@
           null,
           null,
           null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/home/igor/rails-api/app/models/follower.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          33,
-          0,
           null,
           null,
           null
@@ -315,26 +333,6 @@
         "branches": {
         }
       },
-      "/home/igor/rails-api/app/models/comment.rb": {
-        "lines": [
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
       "/home/igor/rails-api/app/mailers/application_mailer.rb": {
         "lines": [
           0,
@@ -401,6 +399,6 @@
         }
       }
     },
-    "timestamp": 1608041513
+    "timestamp": 1608043524
   }
 }
