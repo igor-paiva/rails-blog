@@ -1,11 +1,9 @@
 require "rails_helper"
 require "support/users_helper"
 
-RSpec.configure do |c|
-  c.include UserHelpers
-end
-
 RSpec.describe User, :type => :model do
+  include UserHelper
+
   describe '#follower_users' do
     let(:some_user) { create(:user) }
     let(:some_user_follower) { create(:user) }
@@ -29,7 +27,6 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) }
 
-      # using this because I can't create it using the factory
       before do
         Follower.create(follower_id: other_user.id, followed_id: user.id)
       end
@@ -43,7 +40,6 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:followers) { create_list(:user, 3) }
 
-      # using this because I can't create it using the factory
       before do
         Follower.create(follower_id: followers.first.id, followed_id: user.id)
         Follower.create(follower_id: followers.second.id, followed_id: user.id)
@@ -81,7 +77,6 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) }
 
-      # using this because I can't create it using the factory
       before do
         Follower.create(follower_id: user.id, followed_id: other_user.id)
       end
@@ -95,7 +90,6 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:followeds) { create_list(:user, 3) }
 
-      # using this because I can't create it using the factory
       before do
         Follower.create(follower_id: user.id, followed_id: followeds.first.id)
         Follower.create(follower_id: user.id, followed_id: followeds.second.id)

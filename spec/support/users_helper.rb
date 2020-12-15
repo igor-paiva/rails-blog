@@ -1,4 +1,4 @@
-module UserHelpers
+module UserHelper
   def relation_to_hash_array(users_array)
     result = []
 
