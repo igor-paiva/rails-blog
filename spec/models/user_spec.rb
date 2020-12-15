@@ -4,6 +4,57 @@ require "support/users_helper"
 RSpec.describe User, :type => :model do
   include UserHelper
 
+  describe '.new' do
+    subject do 
+      described_class.new(
+        name: nil,
+        email: nil,
+        password: 'password',
+        password_confirmation: 'password'
+      )
+    end
+
+    context 'when name is invalid' do
+      context 'and email is invalid' do
+        it 'is invalid' do
+          subject.email = 'email.com'
+          subject.name = Faker::Internet.username(specifier: 1..3)
+
+          is_expected.to_not be_valid
+        end
+      end
+
+      context 'and email is valid' do
+        it 'is invalid' do
+          subject.email = Faker::Internet.email
+          subject.name = Faker::Internet.username(specifier: 15..30)
+
+          is_expected.to_not be_valid
+        end
+      end
+    end
+
+    context 'when name is valid' do
+      context 'and email is invalid' do
+        it 'is valid' do
+          subject.email = 'email.com'
+          subject.name = Faker::Internet.username(specifier: 4..15)
+
+          is_expected.to_not be_valid
+        end
+      end
+
+      context 'and email is valid' do
+        it 'is invalid' do
+          subject.email = Faker::Internet.email
+          subject.name = Faker::Internet.username(specifier: 4..15)
+
+          is_expected.to be_valid
+        end
+      end
+    end
+  end
+
   describe '#follower_users' do
     let(:some_user) { create(:user) }
     let(:some_user_follower) { create(:user) }
