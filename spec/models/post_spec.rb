@@ -10,11 +10,12 @@ RSpec.describe Post, :type => :model do
 
     let(:some_user) { create(:user) }
     let(:some_user_followed) { create(:followed_user) }
-    let(:some_user_post) { create(:post) }
+    let!(:some_user_post) { create(:post) }
 
     before do
       Follower.create(follower_id: some_user.id, followed_id: some_user_followed.id)
 
+      create_list(:post, 3, user: some_user)
       create_list(:post, 3, user: some_user_followed)
     end
 

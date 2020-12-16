@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Comment, :type => :model do
   describe '.new' do
-    let(:user) { create(:user) }
-    let(:other_user) { create(:user) }
+    let!(:user) { create(:user) }
+    let!(:other_user) { create(:user) }
 
     subject do
       described_class.new(
