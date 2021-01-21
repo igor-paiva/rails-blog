@@ -39,11 +39,9 @@ RSpec.describe Follower, :type => :model do
     end
 
     context 'when the user follows the other' do
-      before do
-        Follower.create(follower_id: user.id, followed_id: other_user.id)
-      end
-
       it 'return true' do
+        Follower.create(follower_id: user.id, followed_id: other_user.id)
+
         is_expected.to eq(true)
       end
     end

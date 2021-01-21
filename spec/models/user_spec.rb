@@ -78,11 +78,9 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:other_user) { create(:follower_user) }
 
-      before do
-        Follower.create(follower_id: other_user.id, followed_id: user.id)
-      end
-
       it 'return a list containing the follower info' do
+        Follower.create(follower_id: other_user.id, followed_id: user.id)
+        
         is_expected.to match_array(relation_to_hash_array([other_user]))
       end
     end
@@ -91,13 +89,11 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:followers) { create_list(:follower_user, 3) }
 
-      before do
+      it 'return a list containing all followers info' do
         Follower.create(follower_id: followers.first.id, followed_id: user.id)
         Follower.create(follower_id: followers.second.id, followed_id: user.id)
         Follower.create(follower_id: followers.third.id, followed_id: user.id)
-      end
 
-      it 'return a list containing all followers info' do
         is_expected.to match_array(
           relation_to_hash_array(followers)
         )
@@ -128,11 +124,9 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:other_user) { create(:followed_user) }
 
-      before do
-        Follower.create(follower_id: user.id, followed_id: other_user.id)
-      end
-
       it 'return a list containing the followed user' do
+        Follower.create(follower_id: user.id, followed_id: other_user.id)
+
         is_expected.to match_array(([other_user]))
       end
     end
@@ -141,13 +135,11 @@ RSpec.describe User, :type => :model do
       let(:user) { create(:user) }
       let(:followeds) { create_list(:followed_user, 3) }
 
-      before do
+      it 'return a list containing all followed users' do
         Follower.create(follower_id: user.id, followed_id: followeds.first.id)
         Follower.create(follower_id: user.id, followed_id: followeds.second.id)
         Follower.create(follower_id: user.id, followed_id: followeds.third.id)
-      end
 
-      it 'return a list containing all followed users' do
         is_expected.to match_array(followeds)
       end
     end

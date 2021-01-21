@@ -24,11 +24,9 @@ RSpec.describe Comment, :type => :model do
     end
 
     context 'when the user follows the other' do
-      before do
-        Follower.create(follower_id: user.id, followed_id: other_user.id)
-      end
-
       it 'is valid' do
+        Follower.create(follower_id: user.id, followed_id: other_user.id)
+
         post = create(:post, user: other_user)
 
         subject.post_id = post.id
